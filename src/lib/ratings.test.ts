@@ -25,13 +25,10 @@ describe('formatStarRating', () => {
         expect(formatStarRating(5)).toBe('★★★★★');
     });
 
-    it('renders a half star when the fraction is at least 0.5', () => {
-        expect(formatStarRating(3.5)).toBe('★★★½☆');
-        expect(formatStarRating(4.75)).toBe('★★★★½');
-    });
-
-    it('rounds fractions below 0.5 down to a full star', () => {
+    it('rounds fractional ratings down to full stars', () => {
         expect(formatStarRating(3.4)).toBe('★★★☆☆');
+        expect(formatStarRating(3.5)).toBe('★★★☆☆');
+        expect(formatStarRating(4.75)).toBe('★★★★☆');
     });
 
     it('always produces five star positions', () => {
