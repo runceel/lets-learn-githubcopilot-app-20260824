@@ -51,6 +51,7 @@ export async function getAllGameIds(db: Database): Promise<number[]> {
 }
 ```
 
+- Every exported function in `db/` and `src/lib/` must have a TSDoc/JSDoc comment with `@param` entries for its arguments and an `@returns` entry for its result. Document the injectable `db` argument explicitly when present.
 - Always `order by` a stable column (title) so static builds are deterministic.
 - Map raw rows to the app-facing `Game`/`Publisher`/`Category` types in one place; don't leak Drizzle row shapes into components.
 - Keep ordering/lookup logic in `games.ts`, not in pages.
@@ -62,6 +63,12 @@ Seed-derived values must be reproducible across builds. Derive star ratings from
 ## Testing
 
 Unit-test transforms directly and helpers against `createTestDatabase()`. See [`unit-tests.instructions.md`](unit-tests.instructions.md).
+
+## Comments and Formatting
+
+- Comments explain intent, invariants, or decisions; they must not restate SQL, assignments, or other self-explanatory code.
+- Keep TSDoc accurate when a function's behavior or signature changes; stale documentation is a defect.
+- Use four-space indentation, semicolons, single quotes, and trailing commas in multiline TypeScript. Let ESLint enforce type and import conventions; keep purely stylistic changes consistent with the surrounding file.
 
 ## Node.js requirement
 

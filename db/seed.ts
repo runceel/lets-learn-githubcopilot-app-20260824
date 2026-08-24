@@ -50,7 +50,12 @@ async function upsertPublishers(db: Database, names: string[]): Promise<Map<stri
     return map;
 }
 
-/** Seed the database from the games CSV. Idempotent: skips existing games by title. */
+/**
+ * Seed the database from the games CSV, skipping existing titles.
+ * @param db Injectable Drizzle database client to populate.
+ * @param csvPath CSV file to read.
+ * @returns A promise resolved after all rows are inserted.
+ */
 export async function seedDatabase(db: Database, csvPath: string = join(here, 'games.csv')): Promise<void> {
     const rows = parseGamesCsv(readFileSync(csvPath, 'utf-8'));
 
